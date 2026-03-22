@@ -1,0 +1,148 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "img"
+public_folder: "/img"
+
+locale: ru
+
+collections:
+  - name: "vitamind"
+    label: "Витамин Д — лендинг"
+    files:
+
+      - name: "content"
+        label: "Весь контент страницы"
+        file: "content.json"
+        format: json
+        fields:
+
+          - label: "Hero"
+            name: hero
+            widget: object
+            fields:
+              - { label: "Заголовок (HTML разрешён)", name: title, widget: string }
+              - { label: "Подзаголовок", name: subtitle, widget: text }
+              - { label: "Текст кнопки", name: cta_text, widget: string }
+              - { label: "Ссылка кнопки", name: cta_url, widget: string }
+
+          - label: "Почему важно поддерживать витамин Д"
+            name: benefits
+            widget: object
+            fields:
+              - { label: "Заголовок секции", name: title, widget: string }
+              - { label: "Текст CTA кнопки", name: cta_text, widget: string }
+              - { label: "Ссылка CTA", name: cta_url, widget: string }
+              - label: "Карточки"
+                name: items
+                widget: list
+                fields:
+                  - { label: "Заголовок", name: heading, widget: string }
+                  - { label: "Текст", name: text, widget: text }
+                  - { label: "Картинка", name: image, widget: image }
+
+          - label: "Для чего нужен анализ 25-ОН"
+            name: analysis
+            widget: object
+            fields:
+              - { label: "Заголовок секции", name: title, widget: string }
+              - { label: "Текст CTA кнопки", name: cta_text, widget: string }
+              - { label: "Ссылка CTA", name: cta_url, widget: string }
+              - { label: "Картинка", name: image, widget: image }
+              - label: "Пункты"
+                name: points
+                widget: list
+                fields:
+                  - { label: "Заголовок", name: heading, widget: string }
+                  - { label: "Текст", name: text, widget: text }
+
+          - label: "Блок расчёта дозировки"
+            name: cta_dosage
+            widget: object
+            fields:
+              - { label: "Заголовок", name: title, widget: string }
+              - { label: "Подзаголовок карточки (HTML)", name: card_heading, widget: string }
+              - { label: "Сноска", name: footnote, widget: text }
+              - { label: "Текст кнопки", name: cta_text, widget: string }
+              - { label: "Ссылка кнопки", name: cta_url, widget: string }
+
+          - label: "Витамин Д в цифрах"
+            name: stats
+            widget: object
+            fields:
+              - { label: "Заголовок секции", name: title, widget: string }
+              - { label: "Текст CTA кнопки", name: cta_text, widget: string }
+              - { label: "Ссылка CTA", name: cta_url, widget: string }
+              - label: "Карточки"
+                name: cards
+                widget: list
+                fields:
+                  - { label: "Картинка (необязательно)", name: image, widget: image, required: false }
+                  - { label: "Заголовок (необязательно)", name: heading, widget: string, required: false }
+                  - { label: "Текст", name: text, widget: text }
+
+          - label: "Препараты витамина Д"
+            name: products
+            widget: object
+            fields:
+              - { label: "Заголовок секции", name: title, widget: string }
+              - label: "Препараты"
+                name: items
+                widget: list
+                fields:
+                  - { label: "Название", name: name, widget: string }
+                  - { label: "Фото", name: image, widget: image }
+
+          - label: "Статьи про витамин Д"
+            name: articles
+            widget: object
+            fields:
+              - { label: "Заголовок секции", name: title, widget: string }
+              - label: "Статьи"
+                name: items
+                widget: list
+                fields:
+                  - { label: "Заголовок", name: title, widget: string }
+                  - { label: "Текст", name: text, widget: text }
+                  - { label: "Картинка", name: image, widget: image }
+                  - { label: "Ссылка", name: url, widget: string }
+                  - { label: "Бейдж", name: badge, widget: string }
+
+          - label: "Научные исследования"
+            name: research
+            widget: object
+            fields:
+              - { label: "Заголовок секции", name: title, widget: string }
+              - label: "Исследования"
+                name: items
+                widget: list
+                fields:
+                  - { label: "Текст", name: text, widget: text }
+                  - { label: "Ссылка", name: url, widget: string }
+                  - { label: "Широкая карточка?", name: wide, widget: boolean, default: false }
+                  - { label: "Картинка (только для широких)", name: image, widget: image, required: false }
+
+          - label: "Проверьте своё здоровье"
+            name: health
+            widget: object
+            fields:
+              - { label: "Заголовок секции", name: title, widget: string }
+              - { label: "Текст CTA кнопки", name: cta_text, widget: string }
+              - { label: "Ссылка CTA", name: cta_url, widget: string }
+              - label: "Программы"
+                name: items
+                widget: list
+                fields:
+                  - { label: "Бейдж", name: badge, widget: string }
+                  - { label: "Название программы", name: title, widget: string }
+                  - { label: "Срок (дни)", name: days, widget: string }
+                  - { label: "Картинка", name: image, widget: image }
+                  - { label: "Цвет фона (CSS gradient)", name: bg, widget: string }
+
+          - label: "Футер"
+            name: footer
+            widget: object
+            fields:
+              - { label: "Логотип", name: logo, widget: string }
+              - { label: "Копирайт", name: copy, widget: string }

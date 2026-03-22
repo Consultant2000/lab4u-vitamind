@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Витамин Д — Lab4U</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <header class="header">
+      <div class="header__inner">
+        <div class="header__logo">Lab4U</div>
+        <div class="header__controls">
+          <button class="header__city">Москва и область <span class="chevron">&#8964;</span></button>
+          <div class="header__search">
+            <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><circle cx="9" cy="9" r="6" stroke="#8C94A6" stroke-width="1.5"/><path d="M14 14l3 3" stroke="#8C94A6" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>Поиск</span>
+          </div>
+        </div>
+        <nav class="header__nav">
+          <a href="#">Анализы и цены</a>
+          <a href="#">Адреса</a>
+          <a href="#">Расшифровка</a>
+          <a href="#" class="header__nav-icon">
+            <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5" stroke="#fff" stroke-width="1.5"/><path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Личный кабинет
+          </a>
+          <a href="#" class="header__nav-icon">
+            <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><path d="M3 4h14l-1.5 8H4.5L3 4Z" stroke="#fff" stroke-width="1.5"/><circle cx="7" cy="16" r="1" fill="#fff"/><circle cx="14" cy="16" r="1" fill="#fff"/></svg>
+            Корзина
+          </a>
+        </nav>
+        <!-- Мобильные иконки (планшет/мобайл) -->
+        <div class="header__mobile-icons">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="1.5"/><path d="M17 17l4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div class="header__cart-wrap">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M4 5h16l-2 10H6L4 5Z" stroke="#fff" stroke-width="1.5"/><circle cx="9" cy="19" r="1.5" fill="#fff"/><circle cx="17" cy="19" r="1.5" fill="#fff"/></svg>
+            <span class="header__badge">2</span>
+          </div>
+          <button class="header__burger" aria-label="Меню">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="hero__content">
+      <div class="hero__left">
+        <div class="hero__card">
+          <h1 class="hero__title">У 82% Россиян<br>нехватка&nbsp;витамина&nbsp;Д</h1>
+          <p class="hero__subtitle">Это отражается на самочувствии, настроении, иммунитете, костях, мышцах, сердце и коже.</p>
+          <a href="#" class="btn btn--white btn--full">Проверить витамин Д со скидкой 50%</a>
+        </div>
+      </div>
+    </div>
+    <img src="img/hero-main.png" class="hero__img hero__img--main" alt="Витамин Д">
+    <img src="img/hero-4-1d2305.png" class="hero__img hero__img--4" alt="">
+    <img src="img/hero-3-5b3d02.png" class="hero__img hero__img--3" alt="">
+    <img src="img/hero-1-718b78.png" class="hero__img hero__img--1" alt="">
+  </section>
+
+  <!-- SECTION 1: Почему важно поддерживать витамин Д? -->
+  <section class="section section--gray" data-section="benefits">
+    <div class="container">
+      <h2 class="section__title">Почему важно поддерживать витамин Д?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-card__img-wrap">
+            <img src="img/card-virus-7ef400.png" alt="Иммунитет">
+          </div>
+          <div class="benefit-card__body glass">
+            <h3 class="benefit-card__heading">Иммунитет укрепится</h3>
+            <p>Витамин Д снижает риск сердечно-сосудистых заболеваний, развития гриппа, рассеянного склероза, диабета, рака толстой кишки, груди и простаты</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__img-wrap">
+            <img src="img/card-smile-1a9869.png" alt="Настроение">
+          </div>
+          <div class="benefit-card__body glass">
+            <h3 class="benefit-card__heading">Настроение улучшится</h3>
+            <p>Витамин Д играет важную роль в регулировании настроения, сна и бодрствования, предотвращении депрессии</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__img-wrap">
+            <img src="img/card-muscle-681285.png" alt="Кости">
+          </div>
+          <div class="benefit-card__body glass">
+            <h3 class="benefit-card__heading">Кости станут крепче</h3>
+            <p>Витамин Д увеличивает поглощение кальция и фосфора и способствует минерализации костей</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__img-wrap">
+            <img src="img/card-dumbbell-77c0ac.png" alt="Мышцы">
+          </div>
+          <div class="benefit-card__body glass">
+            <h3 class="benefit-card__heading">Мышцы перестанут беспокоить</h3>
+            <p>Дефицит витамина Д может вызывать мышечные боли и слабость</p>
+          </div>
+        </div>
+      </div>
+      <div class="section__cta">
+        <a href="#" class="btn btn--cyan">Проверить витамин Д со скидкой 50% →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Для чего нужен анализ 25-ОН витамина Д? -->
+  <section class="section section--gray" data-section="analysis">
+    <div class="container">
+      <h2 class="section__title">Для чего нужен анализ 25-ОН витамина Д?</h2>
+      <div class="analysis-card">
+        <div class="analysis-row">
+          <div class="analysis-points">
+            <div class="analysis-point">
+              <h3 class="gradient-text">Легко измерить</h3>
+              <p>Всего один анализ 25-OH витамин Д покажет текущий уровень витамина и потребность доп. приема препаратов.</p>
+            </div>
+            <div class="analysis-point">
+              <h3 class="gradient-text">Легко сдать</h3>
+              <p>Положите анализ 25-OH витамин Д в корзину, запишитесь на сдачу и получите скидку 50%, оплатив заказ онлайн.</p>
+            </div>
+            <div class="analysis-point">
+              <h3 class="gradient-text">Легко скорректировать</h3>
+              <p>Впишите результаты анализа 25-OH витамин Д ниже. Мы рассчитаем вам дозировку препаратов витамина Д и предложим удобную схему приема.</p>
+            </div>
+          </div>
+          <div class="analysis-image">
+            <img src="img/sec2-image-2e970d.png" alt="Анализ 25-ОН витамина Д">
+          </div>
+        </div>
+      </div>
+      <div class="section__cta">
+        <a href="#" class="btn btn--gradient-pink">Сдать анализ 25-ОН со скидкой 50% →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION: Узнайте свою дозировку -->
+  <section class="section cta-dosage" data-section="cta_dosage">
+    <div class="container">
+      <h2 class="section__title section__title--center">Узнайте свою дозировку витамина Д</h2>
+      <div class="cta-card">
+        <div class="cta-card__inner">
+          <div class="cta-card__left">
+            <h3 class="cta-card__heading">Рассчитаем дозировку<br>по результатам анализа</h3>
+          </div>
+          <div class="cta-card__form">
+            <div class="form-fields">
+              <input type="text" class="form-input" placeholder="Введите результат анализа">
+              <div class="form-select">
+                <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><circle cx="9" cy="9" r="6" stroke="#8C94A6" stroke-width="1.5"/><path d="M14 14l3 3" stroke="#8C94A6" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span>Выберите единицу измерения</span>
+                <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><path d="M5 8l5 5 5-5" stroke="#8C94A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <div class="form-bottom">
+              <p class="form-footnote">*Клинические рекомендации «Дефицит витамина D у взрослых», 2021. — Российская ассоциация эндокринологов</p>
+              <a href="#" class="btn btn--gradient-cyan">Рассчитать дозировку →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Витамин Д в цифрах -->
+  <section class="section section--gray" data-section="stats">
+    <div class="container">
+      <h2 class="section__title">Витамин Д в цифрах</h2>
+      <div class="stats-grid">
+        <div class="stats-card">
+          <img src="img/stats-norm-4a5444.png" class="stats-card__img" alt="Норма витамина Д">
+          <h3>Норма 25-ОН витамина Д 30-100 нг/мл</h3>
+          <p>Это считается достаточным уровнем витамина Д в крови. Показатель 10-30 нг/мл считается недостатком витамина Д, 0-10 нг/мл — дефицитом. Уровень витамина Д выше 100 нг/мл является избытком, при котором возможен токсический эффект</p>
+        </div>
+        <div class="stats-card">
+          <img src="img/stats-82-b8017f.png" class="stats-card__img" alt="82% россиян">
+          <p class="stats-card__text">У 82% Россиян нехватка витамина Д. Это отражается на самочувствии, настроении, иммунитете, костях, мышцах, сердце, коже</p>
+        </div>
+        <div class="stats-card">
+          <p>Если ваш уровень витамина Д 30-100 нг/мл, ваша суточная норма потребления 1000 МЕ. Если уровень ниже, то дозировка увеличивается. Сколько нужно именно вам, поможет рассчитать <a href="#" class="link-gradient">Калькулятор</a></p>
+        </div>
+        <div class="stats-card">
+          <p>Проверить витамин Д стоит перед началом приема препаратов D3. В зависимости от результата анализа и длительности приема препаратов D3, сдавать анализ 25-OH витамин Д рекомендуется 1-2 раза в год. Чтобы узнать, как часто вам стоит проверять витамин Д, <a href="#" class="link-gradient">воспользуйтесь Калькулятором</a></p>
+        </div>
+      </div>
+      <div class="section__cta">
+        <a href="#" class="btn btn--gradient-cyan">Проверить витамин Д со скидкой 50% <span class="btn__arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Препараты витамина Д -->
+  <section class="section section--gray" data-section="products">
+    <div class="container">
+      <h2 class="section__title">Препараты витамина Д</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-card__photo">
+            <img src="img/product-devilam-795eed.png" alt="Девилам D3">
+          </div>
+          <div class="product-card__info">
+            <p class="product-card__name">Девилам, D3</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card__photo">
+            <img src="img/product-now-619be1.png" alt="NOW Витамин D3">
+          </div>
+          <div class="product-card__info">
+            <p class="product-card__name">NOW, Витамин D3</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card__photo">
+            <img src="img/product-bionmax-3ed023.png" alt="BIONMAX">
+          </div>
+          <div class="product-card__info">
+            <p class="product-card__name">BIONMAX</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card__photo">
+            <img src="img/product-levrana-568182.png" alt="LEVRANA D3">
+          </div>
+          <div class="product-card__info">
+            <p class="product-card__name">LEVRANA D3</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: Статьи про витамин Д -->
+  <section class="section section--gray" data-section="articles">
+    <div class="container">
+      <h2 class="section__title">Статьи про витамин Д</h2>
+      <div class="articles-grid">
+        <div class="article-card">
+          <div class="article-card__img-wrap">
+            <img src="img/article-1-cf0136.png" alt="Нехватка витамина Д летом">
+          </div>
+          <div class="article-card__content">
+            <div class="badge"><span class="badge__text">Это интересно!</span></div>
+            <div class="article-card__body">
+              <h3>Нехватка витамина Д летом</h3>
+              <p>Почему даже в солнечные месяцы может быть дефицит витамина.</p>
+              <a href="#" class="btn btn--article-yellow">Читать статью →</a>
+            </div>
+          </div>
+        </div>
+        <div class="article-card">
+          <div class="article-card__img-wrap">
+            <img src="img/article-2-5e8bf9.png" alt="Как принимать витамин Д">
+          </div>
+          <div class="article-card__content">
+            <div class="badge"><span class="badge__text">Это интересно!</span></div>
+            <div class="article-card__body">
+              <h3>Как принимать витамин Д</h3>
+              <p>Простые советы по дозировке и режиму приёма.</p>
+              <a href="#" class="btn btn--article-orange">Читать статью →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: Научные исследования по витамину Д -->
+  <section class="section section--gray" data-section="research">
+    <div class="container">
+      <h2 class="section__title">Научные исследования по витамину Д</h2>
+      <div class="research-grid">
+        <div class="research-row">
+          <a href="#" class="research-card research-card--wide">
+            <div class="research-card__body">
+              <p>Клинические рекомендации дефицит витамина D у взрослых: диагностика, лечение и профилактика</p>
+              <div class="research-card__btn">Читать исследование →</div>
+            </div>
+            <img src="img/research-img-1.png" class="research-card__img" alt="">
+          </a>
+          <a href="#" class="research-card">
+            <p>Эпидемия дефицита витамина D и борьба с ней</p>
+            <div class="research-card__btn">Читать →</div>
+          </a>
+          <a href="#" class="research-card">
+            <p>Солнцезащитные кремы подавляют синтез витамина D3</p>
+            <div class="research-card__btn">Читать →</div>
+          </a>
+        </div>
+        <div class="research-row">
+          <a href="#" class="research-card">
+            <p>Роль витамина D в профилактике рака. Аннотация и цифры</p>
+            <div class="research-card__btn">Читать →</div>
+          </a>
+          <a href="#" class="research-card research-card--wide">
+            <div class="research-card__body">
+              <p>Проспективное исследование предикторов уровня витамина D и заболеваемости раком и смертности от него у мужчин</p>
+              <div class="research-card__btn">Читать исследование →</div>
+            </div>
+            <img src="img/research-img-2.png" class="research-card__img" alt="">
+          </a>
+          <a href="#" class="research-card">
+            <p>Витамин D. Информационный бюллетень для медицинских работников</p>
+            <div class="research-card__btn">Читать →</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: Проверьте свое здоровье -->
+  <section class="section section--gray" data-section="health">
+    <div class="container">
+      <h2 class="section__title">Проверьте свое здоровье</h2>
+      <div class="health-grid">
+        <div class="health-card">
+          <div class="badge"><span class="badge__text">Скидка -50%</span></div>
+          <div class="health-card__inner" style="background: linear-gradient(0deg, #FEF2FB 0%, #FDDFF8 100%)">
+            <div class="health-card__texts">
+              <h3>Ежегодное обследование женщин 15–24 лет</h3>
+              <span class="health-card__days">3 дня</span>
+            </div>
+            <img src="img/health-check-1-332d81.png" class="health-card__img" alt="">
+          </div>
+        </div>
+        <div class="health-card">
+          <div class="badge"><span class="badge__text">Скидка -50%</span></div>
+          <div class="health-card__inner" style="background: linear-gradient(0deg, #FEF2F5 0%, #FDDFE3 100%)">
+            <div class="health-card__texts">
+              <h3>Ежегодное обследование женщин 25–34 лет</h3>
+              <span class="health-card__days">3 дня</span>
+            </div>
+            <img src="img/health-check-1-332d81.png" class="health-card__img" alt="">
+          </div>
+        </div>
+        <div class="health-card">
+          <div class="badge"><span class="badge__text">Скидка -50%</span></div>
+          <div class="health-card__inner" style="background: linear-gradient(0deg, #FEFAF2 0%, #FDF1DF 100%)">
+            <div class="health-card__texts">
+              <h3>Ежегодное обследование женщин 35–44 лет</h3>
+              <span class="health-card__days">3 дня</span>
+            </div>
+            <img src="img/health-check-1-332d81.png" class="health-card__img" alt="">
+          </div>
+        </div>
+        <div class="health-card">
+          <div class="badge"><span class="badge__text">Скидка -50%</span></div>
+          <div class="health-card__inner" style="background: linear-gradient(0deg, #F3F7FD 0%, #DEEDFD 100%)">
+            <div class="health-card__texts">
+              <h3>Ежегодное обследование мужчин 15–24 лет</h3>
+              <span class="health-card__days">3 дня</span>
+            </div>
+            <img src="img/health-check-man-108f0c.png" class="health-card__img" alt="">
+          </div>
+        </div>
+        <div class="health-card">
+          <div class="badge"><span class="badge__text">Скидка -50%</span></div>
+          <div class="health-card__inner" style="background: linear-gradient(0deg, #F3FCFD 0%, #DEFBFD 100%)">
+            <div class="health-card__texts">
+              <h3>Ежегодное обследование мужчин 25–34 лет</h3>
+              <span class="health-card__days">3 дня</span>
+            </div>
+            <img src="img/health-check-man-108f0c.png" class="health-card__img" alt="">
+          </div>
+        </div>
+        <div class="health-card">
+          <div class="badge"><span class="badge__text">Скидка -50%</span></div>
+          <div class="health-card__inner" style="background: linear-gradient(0deg, #F5FDF3 0%, #DEFDDE 100%)">
+            <div class="health-card__texts">
+              <h3>Ежегодное обследование мужчин 35–44 лет</h3>
+              <span class="health-card__days">3 дня</span>
+            </div>
+            <img src="img/health-check-man-108f0c.png" class="health-card__img" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="section__cta">
+        <a href="#" class="btn btn--white">Больше анализов со скидкой до 50% →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">Lab4U</div>
+        <p class="footer__copy">© 2025 Lab4U. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/cms-loader.js"></script>
+</body>
+</html>
