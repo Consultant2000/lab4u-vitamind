@@ -1,40 +1,34 @@
-module.exports = async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    if (req.method !== 'GET') return res.status(405).end();
+const https = require('https');
 
-    const { password, repo, file } = req.query;
-    if (!password || password !== process.env.ADMIN_PASSWORD)
-      return res.status(401).json({ error: 'Неверный пароль' });
-
-    const r = await fetch(`https://api.github.com/repos/${repo}/contents/${file}`, {
-      headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` }
-    });
-    const data = await r.json();
-    if (!r.ok) return res.status(r.status).json({ error: data.message });
-    res.status(200).json({ content: data.content, sha: data.sha });
-  };
-
-  И api/save.js:
-
-  module.exports = async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    if (req.method === 'OPTIONS') return res.status(200).end();
-    if (req.method !== 'POST') return res.status(405).end();
-
-    const { password, repo, file, content, sha, message } = req.body;
-    if (!password || password !== process.env.ADMIN_PASSWORD)
-      return res.status(401).json({ error: 'Неверный пароль' });
-
-    const encoded = Buffer.from(content).toString('base64');
-    const r = await fetch(`https://api.github.com/repos/${repo}/contents/${file}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `token ${process.env.GITHUB_TOKEN}`,
-        'Content-Type': 'application/json'
+function ghGet(path, token) {
+  return new Promise((resolve, reject) => {
+    https.get(
+      {
+        hostname: 'api.github.com',
+        path,
+        headers: { Authorization: `token ${token}`, 'User-Agent': 'lab4u-admin' }
       },
-      body: JSON.stringify({ message, content: encoded, sha })
-    });
-    const data = await r.json();
-    if (!r.ok) return res.status(r.status).json({ error: data.message });
-    res.status(200).json({ sha: data.content.sha });
-  };
+      (res) => {
+        let d = '';
+        res.on('data', c => d += c);
+        res.on('end', () => resolve({ status: res.statusCode, body: JSON.parse(d) }));
+      }
+    ).on('error', reject);
+  });
+}
+
+module.exports = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  if (req.method !== 'GET') return res.status(405).end();
+
+  const { password, repo, file } = req.query;
+  if (!password || password !== process.env.ADMIN_PASSWORD)
+    return res.status(401).json({ error: 'Неверный пароль' });
+
+  const { status, body } = await ghGet(
+    `/repos/${repo}/contents/${file}`,
+    process.env.GITHUB_TOKEN
+  );
+  if (status !== 200) return res.status(status).json({ error: body.message });
+  res.status(200).json({ content: body.content, sha: body.sha });
+};
