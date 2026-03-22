@@ -268,7 +268,8 @@ async function loadAndRender() {
   try {
     const file = await ghGet(FILE);
     fileSha = file.sha;
-    data = JSON.parse(atob(file.content.replace(/\n/g, '')));
+    const bytes = Uint8Array.from(atob(file.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+    data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
     render();
     setStatus('');
   } catch(e) {
