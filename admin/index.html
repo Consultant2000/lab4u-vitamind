@@ -1,11 +1,437 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lab4U CMS — Витамин Д</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab4U Admin</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f6fa; color: #1a1d2e; min-height: 100vh; }
+
+    /* Login */
+    .login { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login__card { background: #fff; border-radius: 16px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+    .login__logo { font-size: 26px; font-weight: 700; color: #2563eb; margin-bottom: 6px; }
+    .login__sub { font-size: 15px; color: #6b7280; margin-bottom: 28px; }
+    .login__hint { font-size: 12px; color: #9ca3af; margin-bottom: 6px; line-height: 1.5; }
+
+    /* Elements */
+    label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 4px; }
+    input, textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-family: inherit; transition: border-color .15s; outline: none; background: #fff; color: #1a1d2e; }
+    input:focus, textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+    textarea { resize: vertical; min-height: 72px; }
+    input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all .15s; }
+    .btn--primary { background: #2563eb; color: #fff; }
+    .btn--primary:hover { background: #1d4ed8; }
+    .btn--primary:disabled { opacity: .5; cursor: not-allowed; }
+    .btn--ghost { background: transparent; color: #6b7280; border: 1.5px solid #e5e7eb; }
+    .btn--ghost:hover { border-color: #9ca3af; }
+    .btn--danger { background: transparent; color: #ef4444; border: 1.5px solid #fca5a5; font-size: 12px; padding: 4px 10px; border-radius: 6px; }
+    .btn--danger:hover { background: #fee2e2; }
+    .btn--add { background: #eff6ff; color: #2563eb; border: 1.5px dashed #bfdbfe; font-size: 13px; padding: 8px 16px; width: 100%; margin-top: 8px; border-radius: 8px; cursor: pointer; }
+    .btn--add:hover { background: #dbeafe; }
+
+    /* Header */
+    .header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+    .header__logo { font-size: 18px; font-weight: 700; color: #2563eb; }
+    .header__actions { display: flex; gap: 8px; align-items: center; }
+    .save-status { font-size: 13px; color: #6b7280; }
+    .save-status.saving { color: #f59e0b; }
+    .save-status.saved { color: #10b981; }
+    .save-status.error { color: #ef4444; }
+
+    .container { max-width: 820px; margin: 0 auto; padding: 24px; }
+
+    /* Sections */
+    .section { background: #fff; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; }
+    .section__head { padding: 16px 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+    .section__head:hover { background: #f9fafb; }
+    .section__title { font-size: 15px; font-weight: 600; }
+    .section__arrow { font-size: 20px; color: #9ca3af; transition: transform .2s; line-height: 1; }
+    .section.open .section__arrow { transform: rotate(180deg); }
+    .section__body { padding: 20px; border-top: 1px solid #f3f4f6; display: none; }
+    .section.open .section__body { display: block; }
+
+    /* Fields */
+    .field { margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* List items */
+    .list-label { font-size: 13px; font-weight: 600; color: #6b7280; margin: 8px 0; }
+    .list-item { border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 16px; margin-bottom: 8px; }
+    .list-item__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .list-item__num { font-size: 12px; font-weight: 600; color: #9ca3af; background: #f3f4f6; padding: 2px 8px; border-radius: 4px; }
+
+    /* Image */
+    .img-preview { width: 80px; height: 80px; object-fit: contain; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 6px; display: block; background: #f9fafb; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 24px; right: 24px; background: #1a1d2e; color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 14px; z-index: 1000; transform: translateY(80px); opacity: 0; transition: all .3s; max-width: 320px; }
+    .toast.show { transform: none; opacity: 1; }
+    .toast.ok { background: #10b981; }
+    .toast.err { background: #ef4444; }
+
+    /* Spinner */
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+<!-- LOGIN -->
+<div id="loginScreen" class="login">
+  <div class="login__card">
+    <div class="login__logo">Lab4U</div>
+    <div class="login__sub">Панель управления лендингами</div>
+    <div class="field">
+      <label>GitHub Personal Access Token</label>
+      <p class="login__hint">github.com → Settings → Developer settings → Personal access tokens → scope: <strong>repo</strong></p>
+      <input type="password" id="patInput" placeholder="ghp_..." autocomplete="off">
+    </div>
+    <button class="btn btn--primary" onclick="login()" style="width:100%;margin-top:16px;justify-content:center">Войти</button>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="adminScreen" style="display:none">
+  <div class="header">
+    <div class="header__logo">Lab4U Admin</div>
+    <div class="header__actions">
+      <span id="saveStatus" class="save-status"></span>
+      <button class="btn btn--primary" id="saveBtn" onclick="saveContent()">Сохранить</button>
+      <button class="btn btn--ghost" onclick="logout()">Выйти</button>
+    </div>
+  </div>
+  <div class="container" id="editor"></div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+// ─── Config ──────────────────────────────────────────
+const REPO  = 'Consultant2000/lab4u-vitamind';
+const FILE  = 'content.json';
+
+// Field definitions: [label, type]
+// types: string | text | url | image | boolean
+const SCHEMA = {
+  hero: {
+    _label: 'Hero — главный экран',
+    title:    ['Заголовок (HTML разрешён)', 'text'],
+    subtitle: ['Подзаголовок', 'text'],
+    cta_text: ['Текст кнопки', 'string'],
+    cta_url:  ['Ссылка кнопки', 'url'],
+  },
+  benefits: {
+    _label:   'Почему важно поддерживать витамин Д',
+    title:    ['Заголовок секции', 'string'],
+    cta_text: ['Текст кнопки', 'string'],
+    cta_url:  ['Ссылка кнопки', 'url'],
+    items: {
+      _label:  'Карточки',
+      heading: ['Заголовок', 'string'],
+      text:    ['Текст', 'text'],
+      image:   ['Картинка (URL)', 'image'],
+    }
+  },
+  analysis: {
+    _label:   'Для чего нужен анализ 25-ОН',
+    title:    ['Заголовок секции', 'string'],
+    cta_text: ['Текст кнопки', 'string'],
+    cta_url:  ['Ссылка кнопки', 'url'],
+    image:    ['Картинка секции (URL)', 'image'],
+    points: {
+      _label:  'Пункты',
+      heading: ['Заголовок', 'string'],
+      text:    ['Текст', 'text'],
+    }
+  },
+  cta_dosage: {
+    _label:       'Блок расчёта дозировки',
+    title:        ['Заголовок', 'string'],
+    card_heading: ['Подзаголовок карточки (HTML)', 'text'],
+    footnote:     ['Сноска', 'text'],
+    cta_text:     ['Текст кнопки', 'string'],
+    cta_url:      ['Ссылка кнопки', 'url'],
+  },
+  stats: {
+    _label:   'Витамин Д в цифрах',
+    title:    ['Заголовок секции', 'string'],
+    cta_text: ['Текст кнопки', 'string'],
+    cta_url:  ['Ссылка кнопки', 'url'],
+    cards: {
+      _label:  'Карточки',
+      heading: ['Заголовок', 'string'],
+      text:    ['Текст', 'text'],
+      image:   ['Картинка (URL)', 'image'],
+    }
+  },
+  products: {
+    _label: 'Препараты витамина Д',
+    title:  ['Заголовок секции', 'string'],
+    items: {
+      _label: 'Препараты',
+      name:   ['Название', 'string'],
+      image:  ['Фото (URL)', 'image'],
+    }
+  },
+  articles: {
+    _label: 'Статьи',
+    title:  ['Заголовок секции', 'string'],
+    items: {
+      _label: 'Статьи',
+      title:  ['Заголовок', 'string'],
+      text:   ['Текст', 'text'],
+      badge:  ['Бейдж', 'string'],
+      url:    ['Ссылка', 'url'],
+      image:  ['Картинка (URL)', 'image'],
+    }
+  },
+  research: {
+    _label: 'Научные исследования',
+    title:  ['Заголовок секции', 'string'],
+    items: {
+      _label: 'Исследования',
+      text:   ['Текст', 'text'],
+      url:    ['Ссылка', 'url'],
+      wide:   ['Широкая карточка?', 'boolean'],
+      image:  ['Картинка (только для широких, URL)', 'image'],
+    }
+  },
+  health: {
+    _label:   'Проверьте своё здоровье',
+    title:    ['Заголовок секции', 'string'],
+    cta_text: ['Текст кнопки', 'string'],
+    cta_url:  ['Ссылка кнопки', 'url'],
+    items: {
+      _label: 'Программы',
+      badge:  ['Бейдж', 'string'],
+      title:  ['Название программы', 'string'],
+      days:   ['Срок (дни)', 'string'],
+      image:  ['Картинка (URL)', 'image'],
+      bg:     ['Цвет фона (CSS gradient)', 'string'],
+    }
+  },
+  footer: {
+    _label: 'Футер',
+    logo:   ['Логотип', 'string'],
+    copy:   ['Копирайт', 'text'],
+  }
+};
+
+// ─── State ───────────────────────────────────────────
+let pat = '', data = null, fileSha = '';
+
+// ─── Auth ────────────────────────────────────────────
+function login() {
+  const v = document.getElementById('patInput').value.trim();
+  if (!v) return;
+  pat = v;
+  localStorage.setItem('l4u_pat', v);
+  loadAndRender();
+}
+function logout() {
+  localStorage.removeItem('l4u_pat');
+  location.reload();
+}
+
+// ─── GitHub API ──────────────────────────────────────
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    headers: { Authorization: `token ${pat}` }
+  });
+  if (!r.ok) throw new Error(`GitHub ${r.status}`);
+  return r.json();
+}
+async function ghPut(path, content, sha, msg) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg, content: b64(content), sha })
+  });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.message || `GitHub ${r.status}`); }
+  return r.json();
+}
+function b64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+// ─── Load & Render ───────────────────────────────────
+async function loadAndRender() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminScreen').style.display = 'block';
+  setStatus('saving', 'Загрузка...');
+  try {
+    const file = await ghGet(FILE);
+    fileSha = file.sha;
+    data = JSON.parse(atob(file.content.replace(/\n/g, '')));
+    render();
+    setStatus('');
+  } catch(e) {
+    setStatus('error', 'Ошибка: ' + e.message);
+    toast('Ошибка загрузки: ' + e.message, 'err');
+  }
+}
+
+function render() {
+  const root = document.getElementById('editor');
+  root.innerHTML = '';
+  for (const [key, schema] of Object.entries(SCHEMA)) {
+    if (!data[key]) continue;
+    root.appendChild(mkSection(key, schema));
+  }
+  // Open first section
+  root.querySelector('.section')?.classList.add('open');
+}
+
+function mkSection(key, schema) {
+  const sec = el('div', 'section');
+  sec.innerHTML = `
+    <div class="section__head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="section__title">${schema._label || key}</span>
+      <span class="section__arrow">⌃</span>
+    </div>`;
+  const body = el('div', 'section__body');
+  for (const [fk, fd] of Object.entries(schema)) {
+    if (fk === '_label') continue;
+    if (Array.isArray(fd)) {
+      body.appendChild(mkField(key, fk, data[key][fk], fd));
+    } else {
+      body.appendChild(mkList(key, fk, data[key][fk] || [], fd));
+    }
+  }
+  sec.appendChild(body);
+  return sec;
+}
+
+function mkField(sk, fk, val, [lbl, type], listIdx, lk) {
+  const wrap = el('div', 'field');
+  const id = listIdx !== undefined ? `${sk}_${lk}_${listIdx}_${fk}` : `${sk}_${fk}`;
+  const onChange = listIdx !== undefined
+    ? `setItem('${sk}','${lk}',${listIdx},'${fk}',${type === 'boolean' ? 'this.checked' : 'this.value'})`
+    : `setVal('${sk}','${fk}',${type === 'boolean' ? 'this.checked' : 'this.value'})`;
+
+  if (type === 'boolean') {
+    wrap.innerHTML = `<label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+      <input type="checkbox" id="${id}" ${val ? 'checked' : ''} onchange="${onChange}"> ${lbl}</label>`;
+  } else if (type === 'image') {
+    const pid = id + '_p';
+    wrap.innerHTML = `<label>${lbl}</label>
+      ${val ? `<img id="${pid}" class="img-preview" src="${x(val)}" onerror="this.style.display='none'">` : ''}
+      <input type="url" id="${id}" value="${x(val||'')}" placeholder="https://…"
+        oninput="${onChange};updImg('${pid}',this.value)">`;
+  } else if (type === 'text') {
+    wrap.innerHTML = `<label for="${id}">${lbl}</label>
+      <textarea id="${id}" rows="3" oninput="${onChange}">${x(val||'')}</textarea>`;
+  } else {
+    wrap.innerHTML = `<label for="${id}">${lbl}</label>
+      <input type="${type === 'url' ? 'url' : 'text'}" id="${id}" value="${x(val||'')}"
+        oninput="${onChange}">`;
+  }
+  return wrap;
+}
+
+function mkList(sk, lk, arr, schema) {
+  const wrap = el('div');
+  wrap.dataset.list = `${sk}.${lk}`;
+  rebuildList(wrap, sk, lk, arr, schema);
+  return wrap;
+}
+
+function rebuildList(wrap, sk, lk, arr, schema) {
+  wrap.innerHTML = `<div class="list-label">${schema._label || lk}</div>`;
+  arr.forEach((item, i) => {
+    const card = el('div', 'list-item');
+    card.innerHTML = `<div class="list-item__head">
+      <span class="list-item__num">#${i + 1}</span>
+      <button class="btn btn--danger" onclick="removeItem('${sk}','${lk}',${i})">Удалить</button>
+    </div>`;
+    for (const [fk, fd] of Object.entries(schema)) {
+      if (fk === '_label' || !Array.isArray(fd)) continue;
+      card.appendChild(mkField(sk, fk, item[fk], fd, i, lk));
+    }
+    wrap.appendChild(card);
+  });
+  const addBtn = el('button', 'btn btn--add');
+  addBtn.textContent = '+ Добавить';
+  addBtn.onclick = () => {
+    const blank = {};
+    for (const [k, v] of Object.entries(schema)) {
+      if (k === '_label' || !Array.isArray(v)) continue;
+      blank[k] = v[1] === 'boolean' ? false : '';
+    }
+    data[sk][lk].push(blank);
+    rebuildList(wrap, sk, lk, data[sk][lk], schema);
+  };
+  wrap.appendChild(addBtn);
+}
+
+// ─── Data mutations ──────────────────────────────────
+function setVal(sk, fk, val)            { data[sk][fk] = val; }
+function setItem(sk, lk, i, fk, val)   { data[sk][lk][i][fk] = val; }
+function removeItem(sk, lk, i) {
+  data[sk][lk].splice(i, 1);
+  const wrap = document.querySelector(`[data-list="${sk}.${lk}"]`);
+  if (wrap) rebuildList(wrap, sk, lk, data[sk][lk], SCHEMA[sk][lk]);
+}
+function updImg(pid, src) {
+  let img = document.getElementById(pid);
+  if (!img && src) {
+    img = document.createElement('img');
+    img.id = pid; img.className = 'img-preview';
+    const inp = document.getElementById(pid.replace('_p',''));
+    inp?.parentElement.insertBefore(img, inp);
+  }
+  if (img) { img.src = src; img.style.display = src ? 'block' : 'none'; }
+}
+
+// ─── Save ────────────────────────────────────────────
+async function saveContent() {
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Сохраняем…';
+  setStatus('saving', 'Сохраняем…');
+  try {
+    const json = JSON.stringify(data, null, 2);
+    const res = await ghPut(FILE, json, fileSha, 'Admin: update content');
+    fileSha = res.content.sha;
+    setStatus('saved', 'Сохранено ✓');
+    toast('Сохранено! Сайт обновится через ~30 сек', 'ok');
+    setTimeout(() => setStatus(''), 3000);
+  } catch(e) {
+    setStatus('error', 'Ошибка: ' + e.message);
+    toast('Ошибка: ' + e.message, 'err');
+  }
+  btn.disabled = false;
+  btn.textContent = 'Сохранить';
+}
+
+// ─── Helpers ─────────────────────────────────────────
+function el(tag, cls) { const e = document.createElement(tag); if (cls) e.className = cls; return e; }
+function x(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function setStatus(cls, txt = '') {
+  const e = document.getElementById('saveStatus');
+  e.className = 'save-status' + (cls ? ' ' + cls : '');
+  e.textContent = txt;
+}
+function toast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type ? ' ' + type : '');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// ─── Init ────────────────────────────────────────────
+(function() {
+  const saved = localStorage.getItem('l4u_pat');
+  if (saved) { pat = saved; loadAndRender(); }
+  document.getElementById('patInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+})();
+</script>
 </body>
 </html>
