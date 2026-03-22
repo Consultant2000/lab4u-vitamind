@@ -81,11 +81,11 @@
     <div class="login__logo">Lab4U</div>
     <div class="login__sub">Панель управления лендингами</div>
     <div class="field">
-      <label>GitHub Personal Access Token</label>
-      <p class="login__hint">github.com → Settings → Developer settings →<br>Personal access tokens → scope: <strong>repo</strong></p>
-      <input type="password" id="patInput" placeholder="ghp_..." autocomplete="off">
+      <label>Пароль</label>
+      <input type="password" id="patInput" placeholder="••••••••" autocomplete="current-password">
     </div>
     <button class="btn btn--primary" onclick="login()" style="width:100%;margin-top:16px;justify-content:center">Войти</button>
+    <p id="loginError" style="color:#ef4444;font-size:13px;margin-top:10px;display:none">Неверный пароль</p>
   </div>
 </div>
 
@@ -266,20 +266,38 @@ const LANDINGS = {
 };
 
 // ─── State ────────────────────────────────────────────
-let pat = '', data = null, fileSha = '', currentKey = 'vitamind';
+let password = '', data = null, fileSha = '', currentKey = 'vitamind';
 function landing() { return LANDINGS[currentKey]; }
 
 // ─── Auth ─────────────────────────────────────────────
-function login() {
+async function login() {
   const v = document.getElementById('patInput').value.trim();
   if (!v) return;
-  pat = v;
-  localStorage.setItem('l4u_pat', v);
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('adminScreen').style.display = 'block';
-  loadLanding();
+  // Verify password by trying to load current landing
+  password = v;
+  const err = document.getElementById('loginError');
+  err.style.display = 'none';
+  try {
+    const { repo, file } = landing();
+    const r = await fetch(`/api/load?password=${encodeURIComponent(v)}&repo=${encodeURIComponent(repo)}&file=${encodeURIComponent(file)}`);
+    if (r.status === 401) { password = ''; err.style.display = 'block'; return; }
+    if (!r.ok) throw new Error(await r.text());
+    const f = await r.json();
+    fileSha = f.sha;
+    const bytes = Uint8Array.from(atob(f.content.replace(/\n/g,'')), c => c.charCodeAt(0));
+    data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    localStorage.setItem('l4u_pwd', v);
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    render();
+    setStatus('');
+  } catch(e) {
+    password = '';
+    err.textContent = 'Ошибка: ' + e.message;
+    err.style.display = 'block';
+  }
 }
-function logout() { localStorage.removeItem('l4u_pat'); location.reload(); }
+function logout() { localStorage.removeItem('l4u_pwd'); location.reload(); }
 
 // ─── Switch landing ───────────────────────────────────
 function switchLanding(key) {
@@ -288,24 +306,21 @@ function switchLanding(key) {
   loadLanding();
 }
 
-// ─── GitHub API ───────────────────────────────────────
-async function ghGet(repo, path) {
-  const r = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-    headers: { Authorization: `token ${pat}` }
-  });
-  if (!r.ok) throw new Error(`GitHub ${r.status}`);
+// ─── API calls (через Vercel proxy) ───────────────────
+async function apiLoad(repo, file) {
+  const r = await fetch(`/api/load?password=${encodeURIComponent(password)}&repo=${encodeURIComponent(repo)}&file=${encodeURIComponent(file)}`);
+  if (!r.ok) { const e = await r.json(); throw new Error(e.error || `Error ${r.status}`); }
   return r.json();
 }
-async function ghPut(repo, path, content, sha, msg) {
-  const r = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-    method: 'PUT',
-    headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: msg, content: b64(content), sha })
+async function apiSave(repo, file, content, sha, msg) {
+  const r = await fetch('/api/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password, repo, file, content, sha, message: msg })
   });
-  if (!r.ok) { const e = await r.json(); throw new Error(e.message || `GitHub ${r.status}`); }
+  if (!r.ok) { const e = await r.json(); throw new Error(e.error || `Error ${r.status}`); }
   return r.json();
 }
-function b64(str) { return btoa(unescape(encodeURIComponent(str))); }
 
 // ─── Load ─────────────────────────────────────────────
 async function loadLanding() {
@@ -314,7 +329,7 @@ async function loadLanding() {
   setStatus('saving', 'Загрузка…');
   try {
     const { repo, file } = landing();
-    const f = await ghGet(repo, file);
+    const f = await apiLoad(repo, file);
     fileSha = f.sha;
     const bytes = Uint8Array.from(atob(f.content.replace(/\n/g, '')), c => c.charCodeAt(0));
     data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
@@ -446,8 +461,8 @@ async function saveContent() {
   try {
     const { repo, file } = landing();
     const json = JSON.stringify(data, null, 2);
-    const res = await ghPut(repo, file, json, fileSha, `Admin: update ${currentKey} content`);
-    fileSha = res.content.sha;
+    const res = await apiSave(repo, file, json, fileSha, `Admin: update ${currentKey} content`);
+    fileSha = res.sha;
     setStatus('saved', 'Сохранено ✓');
     toast('Сохранено! Сайт обновится через ~30 сек', 'ok');
     setTimeout(() => setStatus(''), 3000);
@@ -476,9 +491,9 @@ function toast(msg, type='') {
 
 // ─── Init ─────────────────────────────────────────────
 (function() {
-  const saved = localStorage.getItem('l4u_pat');
+  const saved = localStorage.getItem('l4u_pwd');
   if (saved) {
-    pat = saved;
+    password = saved;
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminScreen').style.display = 'block';
     loadLanding();
