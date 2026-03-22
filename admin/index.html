@@ -8,44 +8,41 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f6fa; color: #1a1d2e; min-height: 100vh; }
 
-    /* Login */
     .login { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
     .login__card { background: #fff; border-radius: 16px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,.08); }
     .login__logo { font-size: 26px; font-weight: 700; color: #2563eb; margin-bottom: 6px; }
     .login__sub { font-size: 15px; color: #6b7280; margin-bottom: 28px; }
     .login__hint { font-size: 12px; color: #9ca3af; margin-bottom: 6px; line-height: 1.5; }
 
-    /* Elements */
     label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 4px; }
-    input, textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-family: inherit; transition: border-color .15s; outline: none; background: #fff; color: #1a1d2e; }
-    input:focus, textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+    input, textarea, select { width: 100%; padding: 10px 12px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-family: inherit; transition: border-color .15s; outline: none; background: #fff; color: #1a1d2e; }
+    input:focus, textarea:focus, select:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
     textarea { resize: vertical; min-height: 72px; }
     input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; }
 
-    /* Buttons */
     .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all .15s; }
     .btn--primary { background: #2563eb; color: #fff; }
     .btn--primary:hover { background: #1d4ed8; }
     .btn--primary:disabled { opacity: .5; cursor: not-allowed; }
     .btn--ghost { background: transparent; color: #6b7280; border: 1.5px solid #e5e7eb; }
     .btn--ghost:hover { border-color: #9ca3af; }
-    .btn--danger { background: transparent; color: #ef4444; border: 1.5px solid #fca5a5; font-size: 12px; padding: 4px 10px; border-radius: 6px; }
+    .btn--danger { background: transparent; color: #ef4444; border: 1.5px solid #fca5a5; font-size: 12px; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
     .btn--danger:hover { background: #fee2e2; }
     .btn--add { background: #eff6ff; color: #2563eb; border: 1.5px dashed #bfdbfe; font-size: 13px; padding: 8px 16px; width: 100%; margin-top: 8px; border-radius: 8px; cursor: pointer; }
     .btn--add:hover { background: #dbeafe; }
 
-    /* Header */
-    .header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
-    .header__logo { font-size: 18px; font-weight: 700; color: #2563eb; }
+    .header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,.04); gap: 16px; }
+    .header__logo { font-size: 18px; font-weight: 700; color: #2563eb; white-space: nowrap; }
+    .header__select { flex: 0 0 260px; }
+    .header__select select { padding: 8px 12px; font-weight: 500; }
     .header__actions { display: flex; gap: 8px; align-items: center; }
-    .save-status { font-size: 13px; color: #6b7280; }
+    .save-status { font-size: 13px; color: #6b7280; white-space: nowrap; }
     .save-status.saving { color: #f59e0b; }
     .save-status.saved { color: #10b981; }
     .save-status.error { color: #ef4444; }
 
     .container { max-width: 820px; margin: 0 auto; padding: 24px; }
 
-    /* Sections */
     .section { background: #fff; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; }
     .section__head { padding: 16px 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
     .section__head:hover { background: #f9fafb; }
@@ -55,28 +52,24 @@
     .section__body { padding: 20px; border-top: 1px solid #f3f4f6; display: none; }
     .section.open .section__body { display: block; }
 
-    /* Fields */
     .field { margin-bottom: 14px; }
     .field:last-child { margin-bottom: 0; }
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    /* List items */
     .list-label { font-size: 13px; font-weight: 600; color: #6b7280; margin: 8px 0; }
     .list-item { border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 16px; margin-bottom: 8px; }
     .list-item__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .list-item__num { font-size: 12px; font-weight: 600; color: #9ca3af; background: #f3f4f6; padding: 2px 8px; border-radius: 4px; }
 
-    /* Image */
     .img-preview { width: 80px; height: 80px; object-fit: contain; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 6px; display: block; background: #f9fafb; }
 
-    /* Toast */
+    .loading { text-align: center; padding: 60px 24px; color: #9ca3af; font-size: 15px; }
+
     .toast { position: fixed; bottom: 24px; right: 24px; background: #1a1d2e; color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 14px; z-index: 1000; transform: translateY(80px); opacity: 0; transition: all .3s; max-width: 320px; }
     .toast.show { transform: none; opacity: 1; }
-    .toast.ok { background: #10b981; }
+    .toast.ok  { background: #10b981; }
     .toast.err { background: #ef4444; }
 
-    /* Spinner */
-    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
@@ -89,7 +82,7 @@
     <div class="login__sub">Панель управления лендингами</div>
     <div class="field">
       <label>GitHub Personal Access Token</label>
-      <p class="login__hint">github.com → Settings → Developer settings → Personal access tokens → scope: <strong>repo</strong></p>
+      <p class="login__hint">github.com → Settings → Developer settings →<br>Personal access tokens → scope: <strong>repo</strong></p>
       <input type="password" id="patInput" placeholder="ghp_..." autocomplete="off">
     </div>
     <button class="btn btn--primary" onclick="login()" style="width:100%;margin-top:16px;justify-content:center">Войти</button>
@@ -100,6 +93,13 @@
 <div id="adminScreen" style="display:none">
   <div class="header">
     <div class="header__logo">Lab4U Admin</div>
+    <div class="header__select">
+      <select id="landingSelect" onchange="switchLanding(this.value)">
+        <option value="vitamind">Витамин Д</option>
+        <option value="corp">Корпоративным клиентам</option>
+        <option value="partner">Партнёрам</option>
+      </select>
+    </div>
     <div class="header__actions">
       <span id="saveStatus" class="save-status"></span>
       <button class="btn btn--primary" id="saveBtn" onclick="saveContent()">Сохранить</button>
@@ -112,143 +112,192 @@
 <div id="toast" class="toast"></div>
 
 <script>
-// ─── Config ──────────────────────────────────────────
-const REPO  = 'Consultant2000/lab4u-vitamind';
-const FILE  = 'content.json';
+// ─── Landings config ──────────────────────────────────
+const LANDINGS = {
+  vitamind: {
+    label: 'Витамин Д',
+    repo:  'Consultant2000/lab4u-vitamind',
+    file:  'content.json',
+    schema: {
+      hero: {
+        _label: 'Hero — главный экран',
+        title:    ['Заголовок (HTML разрешён)', 'text'],
+        subtitle: ['Подзаголовок', 'text'],
+        cta_text: ['Текст кнопки', 'string'],
+        cta_url:  ['Ссылка кнопки', 'url'],
+      },
+      benefits: {
+        _label: 'Почему важно поддерживать витамин Д',
+        title:    ['Заголовок секции', 'string'],
+        cta_text: ['Текст кнопки', 'string'],
+        cta_url:  ['Ссылка кнопки', 'url'],
+        items: { _label:'Карточки', heading:['Заголовок','string'], text:['Текст','text'], image:['Картинка (URL)','image'] }
+      },
+      analysis: {
+        _label: 'Для чего нужен анализ 25-ОН',
+        title:    ['Заголовок секции', 'string'],
+        cta_text: ['Текст кнопки', 'string'],
+        cta_url:  ['Ссылка кнопки', 'url'],
+        image:    ['Картинка секции (URL)', 'image'],
+        points: { _label:'Пункты', heading:['Заголовок','string'], text:['Текст','text'] }
+      },
+      cta_dosage: {
+        _label: 'Блок расчёта дозировки',
+        title:        ['Заголовок', 'string'],
+        card_heading: ['Подзаголовок карточки (HTML)', 'text'],
+        footnote:     ['Сноска', 'text'],
+        cta_text:     ['Текст кнопки', 'string'],
+        cta_url:      ['Ссылка кнопки', 'url'],
+      },
+      stats: {
+        _label: 'Витамин Д в цифрах',
+        title:    ['Заголовок секции', 'string'],
+        cta_text: ['Текст кнопки', 'string'],
+        cta_url:  ['Ссылка кнопки', 'url'],
+        cards: { _label:'Карточки', heading:['Заголовок','string'], text:['Текст','text'], image:['Картинка (URL)','image'] }
+      },
+      products: {
+        _label: 'Препараты витамина Д',
+        title: ['Заголовок секции', 'string'],
+        items: { _label:'Препараты', name:['Название','string'], image:['Фото (URL)','image'] }
+      },
+      articles: {
+        _label: 'Статьи',
+        title: ['Заголовок секции', 'string'],
+        items: { _label:'Статьи', title:['Заголовок','string'], text:['Текст','text'], badge:['Бейдж','string'], url:['Ссылка','url'], image:['Картинка (URL)','image'] }
+      },
+      research: {
+        _label: 'Научные исследования',
+        title: ['Заголовок секции', 'string'],
+        items: { _label:'Исследования', text:['Текст','text'], url:['Ссылка','url'], wide:['Широкая карточка?','boolean'], image:['Картинка (URL)','image'] }
+      },
+      health: {
+        _label: 'Проверьте своё здоровье',
+        title:    ['Заголовок секции', 'string'],
+        cta_text: ['Текст кнопки', 'string'],
+        cta_url:  ['Ссылка кнопки', 'url'],
+        items: { _label:'Программы', badge:['Бейдж','string'], title:['Название','string'], days:['Срок (дни)','string'], image:['Картинка (URL)','image'], bg:['Цвет фона (CSS)','string'] }
+      },
+      footer: { _label:'Футер', logo:['Логотип','string'], copy:['Копирайт','text'] }
+    }
+  },
 
-// Field definitions: [label, type]
-// types: string | text | url | image | boolean
-const SCHEMA = {
-  hero: {
-    _label: 'Hero — главный экран',
-    title:    ['Заголовок (HTML разрешён)', 'text'],
-    subtitle: ['Подзаголовок', 'text'],
-    cta_text: ['Текст кнопки', 'string'],
-    cta_url:  ['Ссылка кнопки', 'url'],
-  },
-  benefits: {
-    _label:   'Почему важно поддерживать витамин Д',
-    title:    ['Заголовок секции', 'string'],
-    cta_text: ['Текст кнопки', 'string'],
-    cta_url:  ['Ссылка кнопки', 'url'],
-    items: {
-      _label:  'Карточки',
-      heading: ['Заголовок', 'string'],
-      text:    ['Текст', 'text'],
-      image:   ['Картинка (URL)', 'image'],
+  corp: {
+    label: 'Корпоративным клиентам',
+    repo:  'Consultant2000/lab4u-corp',
+    file:  'content.json',
+    schema: {
+      hero: {
+        _label: 'Hero — главный экран',
+        title:    ['Заголовок (HTML разрешён)', 'text'],
+        subtitle: ['Подзаголовок', 'text'],
+        cta_text: ['Текст кнопки', 'string'],
+        cta_url:  ['Ссылка кнопки', 'url'],
+      },
+      about: {
+        _label: 'О нас',
+        title: ['Заголовок', 'string'],
+        cards: { _label:'Карточки', title:['Заголовок','string'], text:['Текст','text'] }
+      },
+      benefits: {
+        _label: 'Преимущества',
+        title: ['Заголовок секции', 'string'],
+        cards: { _label:'Карточки', title:['Заголовок','string'], text:['Текст','text'] }
+      },
+      bionmax: {
+        _label: 'BionMax',
+        cta_url: ['Ссылка кнопки', 'url'],
+        cards: { _label:'Карточки', title:['Заголовок','string'], text:['Текст','text'] }
+      },
+      cta: {
+        _label: 'Форма заявки',
+        title:     ['Заголовок', 'string'],
+        card_title:['Заголовок карточки', 'string'],
+        card_desc: ['Описание', 'text'],
+        email:     ['Email', 'string'],
+        phone:     ['Телефон', 'string'],
+      },
+      footer: { _label:'Футер', copy:['Копирайт','text'] }
     }
   },
-  analysis: {
-    _label:   'Для чего нужен анализ 25-ОН',
-    title:    ['Заголовок секции', 'string'],
-    cta_text: ['Текст кнопки', 'string'],
-    cta_url:  ['Ссылка кнопки', 'url'],
-    image:    ['Картинка секции (URL)', 'image'],
-    points: {
-      _label:  'Пункты',
-      heading: ['Заголовок', 'string'],
-      text:    ['Текст', 'text'],
+
+  partner: {
+    label: 'Партнёрам',
+    repo:  'Consultant2000/lab4u-partner',
+    file:  'content.json',
+    schema: {
+      hero: {
+        _label: 'Hero — главный экран',
+        title:    ['Заголовок (HTML разрешён)', 'text'],
+        subtitle: ['Подзаголовок', 'text'],
+        cta_text: ['Текст кнопки', 'string'],
+        cta_url:  ['Ссылка кнопки', 'url'],
+      },
+      benefits: {
+        _label: 'Ваши выгоды',
+        title: ['Заголовок секции', 'string'],
+        items: { _label:'Пункты', title:['Заголовок','string'], text:['Текст','text'] }
+      },
+      steps: {
+        _label: 'Шаги партнёрства',
+        title: ['Заголовок секции', 'string'],
+        items: { _label:'Шаги', title:['Заголовок','string'], text:['Текст','text'] }
+      },
+      staff: {
+        _label: 'Команда',
+        title: ['Заголовок секции', 'string'],
+        items: { _label:'Элементы', title:['Заголовок','string'], text:['Текст','text'] }
+      },
+      why: {
+        _label: 'Почему Lab4U',
+        title: ['Заголовок секции', 'string'],
+        items: { _label:'Пункты', title:['Заголовок','string'], text:['Текст','text'] }
+      },
+      contact: {
+        _label: 'Контакты',
+        title:    ['Заголовок', 'string'],
+        subtitle: ['Подзаголовок', 'text'],
+        email:    ['Email', 'string'],
+        phone:    ['Телефон', 'string'],
+      },
+      footer: { _label:'Футер', copy:['Копирайт','text'] }
     }
-  },
-  cta_dosage: {
-    _label:       'Блок расчёта дозировки',
-    title:        ['Заголовок', 'string'],
-    card_heading: ['Подзаголовок карточки (HTML)', 'text'],
-    footnote:     ['Сноска', 'text'],
-    cta_text:     ['Текст кнопки', 'string'],
-    cta_url:      ['Ссылка кнопки', 'url'],
-  },
-  stats: {
-    _label:   'Витамин Д в цифрах',
-    title:    ['Заголовок секции', 'string'],
-    cta_text: ['Текст кнопки', 'string'],
-    cta_url:  ['Ссылка кнопки', 'url'],
-    cards: {
-      _label:  'Карточки',
-      heading: ['Заголовок', 'string'],
-      text:    ['Текст', 'text'],
-      image:   ['Картинка (URL)', 'image'],
-    }
-  },
-  products: {
-    _label: 'Препараты витамина Д',
-    title:  ['Заголовок секции', 'string'],
-    items: {
-      _label: 'Препараты',
-      name:   ['Название', 'string'],
-      image:  ['Фото (URL)', 'image'],
-    }
-  },
-  articles: {
-    _label: 'Статьи',
-    title:  ['Заголовок секции', 'string'],
-    items: {
-      _label: 'Статьи',
-      title:  ['Заголовок', 'string'],
-      text:   ['Текст', 'text'],
-      badge:  ['Бейдж', 'string'],
-      url:    ['Ссылка', 'url'],
-      image:  ['Картинка (URL)', 'image'],
-    }
-  },
-  research: {
-    _label: 'Научные исследования',
-    title:  ['Заголовок секции', 'string'],
-    items: {
-      _label: 'Исследования',
-      text:   ['Текст', 'text'],
-      url:    ['Ссылка', 'url'],
-      wide:   ['Широкая карточка?', 'boolean'],
-      image:  ['Картинка (только для широких, URL)', 'image'],
-    }
-  },
-  health: {
-    _label:   'Проверьте своё здоровье',
-    title:    ['Заголовок секции', 'string'],
-    cta_text: ['Текст кнопки', 'string'],
-    cta_url:  ['Ссылка кнопки', 'url'],
-    items: {
-      _label: 'Программы',
-      badge:  ['Бейдж', 'string'],
-      title:  ['Название программы', 'string'],
-      days:   ['Срок (дни)', 'string'],
-      image:  ['Картинка (URL)', 'image'],
-      bg:     ['Цвет фона (CSS gradient)', 'string'],
-    }
-  },
-  footer: {
-    _label: 'Футер',
-    logo:   ['Логотип', 'string'],
-    copy:   ['Копирайт', 'text'],
   }
 };
 
-// ─── State ───────────────────────────────────────────
-let pat = '', data = null, fileSha = '';
+// ─── State ────────────────────────────────────────────
+let pat = '', data = null, fileSha = '', currentKey = 'vitamind';
+function landing() { return LANDINGS[currentKey]; }
 
-// ─── Auth ────────────────────────────────────────────
+// ─── Auth ─────────────────────────────────────────────
 function login() {
   const v = document.getElementById('patInput').value.trim();
   if (!v) return;
   pat = v;
   localStorage.setItem('l4u_pat', v);
-  loadAndRender();
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminScreen').style.display = 'block';
+  loadLanding();
 }
-function logout() {
-  localStorage.removeItem('l4u_pat');
-  location.reload();
+function logout() { localStorage.removeItem('l4u_pat'); location.reload(); }
+
+// ─── Switch landing ───────────────────────────────────
+function switchLanding(key) {
+  currentKey = key;
+  data = null;
+  loadLanding();
 }
 
-// ─── GitHub API ──────────────────────────────────────
-async function ghGet(path) {
-  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+// ─── GitHub API ───────────────────────────────────────
+async function ghGet(repo, path) {
+  const r = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
     headers: { Authorization: `token ${pat}` }
   });
   if (!r.ok) throw new Error(`GitHub ${r.status}`);
   return r.json();
 }
-async function ghPut(path, content, sha, msg) {
-  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+async function ghPut(repo, path, content, sha, msg) {
+  const r = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
     method: 'PUT',
     headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: msg, content: b64(content), sha })
@@ -256,37 +305,39 @@ async function ghPut(path, content, sha, msg) {
   if (!r.ok) { const e = await r.json(); throw new Error(e.message || `GitHub ${r.status}`); }
   return r.json();
 }
-function b64(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
+function b64(str) { return btoa(unescape(encodeURIComponent(str))); }
 
-// ─── Load & Render ───────────────────────────────────
-async function loadAndRender() {
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('adminScreen').style.display = 'block';
-  setStatus('saving', 'Загрузка...');
+// ─── Load ─────────────────────────────────────────────
+async function loadLanding() {
+  const editor = document.getElementById('editor');
+  editor.innerHTML = '<div class="loading">Загрузка…</div>';
+  setStatus('saving', 'Загрузка…');
   try {
-    const file = await ghGet(FILE);
-    fileSha = file.sha;
-    const bytes = Uint8Array.from(atob(file.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+    const { repo, file } = landing();
+    const f = await ghGet(repo, file);
+    fileSha = f.sha;
+    const bytes = Uint8Array.from(atob(f.content.replace(/\n/g, '')), c => c.charCodeAt(0));
     data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
     render();
     setStatus('');
   } catch(e) {
-    setStatus('error', 'Ошибка: ' + e.message);
-    toast('Ошибка загрузки: ' + e.message, 'err');
+    editor.innerHTML = `<div class="loading" style="color:#ef4444">Ошибка: ${e.message}</div>`;
+    setStatus('error', 'Ошибка загрузки');
   }
 }
 
+// ─── Render ───────────────────────────────────────────
 function render() {
   const root = document.getElementById('editor');
   root.innerHTML = '';
-  for (const [key, schema] of Object.entries(SCHEMA)) {
+  const schema = landing().schema;
+  let first = true;
+  for (const [key, sec] of Object.entries(schema)) {
     if (!data[key]) continue;
-    root.appendChild(mkSection(key, schema));
+    const el = mkSection(key, sec);
+    if (first) { el.classList.add('open'); first = false; }
+    root.appendChild(el);
   }
-  // Open first section
-  root.querySelector('.section')?.classList.add('open');
 }
 
 function mkSection(key, schema) {
@@ -299,39 +350,35 @@ function mkSection(key, schema) {
   const body = el('div', 'section__body');
   for (const [fk, fd] of Object.entries(schema)) {
     if (fk === '_label') continue;
-    if (Array.isArray(fd)) {
-      body.appendChild(mkField(key, fk, data[key][fk], fd));
-    } else {
-      body.appendChild(mkList(key, fk, data[key][fk] || [], fd));
-    }
+    if (Array.isArray(fd)) body.appendChild(mkField(key, fk, data[key][fk], fd));
+    else                   body.appendChild(mkList(key, fk, data[key][fk] || [], fd));
   }
   sec.appendChild(body);
   return sec;
 }
 
-function mkField(sk, fk, val, [lbl, type], listIdx, lk) {
+function mkField(sk, fk, val, [lbl, type], idx, lk) {
   const wrap = el('div', 'field');
-  const id = listIdx !== undefined ? `${sk}_${lk}_${listIdx}_${fk}` : `${sk}_${fk}`;
-  const onChange = listIdx !== undefined
-    ? `setItem('${sk}','${lk}',${listIdx},'${fk}',${type === 'boolean' ? 'this.checked' : 'this.value'})`
-    : `setVal('${sk}','${fk}',${type === 'boolean' ? 'this.checked' : 'this.value'})`;
+  const id = idx !== undefined ? `${sk}_${lk}_${idx}_${fk}` : `${sk}_${fk}`;
+  const cb  = idx !== undefined
+    ? `setItem('${sk}','${lk}',${idx},'${fk}',${type==='boolean'?'this.checked':'this.value'})`
+    : `setVal('${sk}','${fk}',${type==='boolean'?'this.checked':'this.value'})`;
 
   if (type === 'boolean') {
     wrap.innerHTML = `<label style="display:flex;align-items:center;gap:8px;cursor:pointer">
-      <input type="checkbox" id="${id}" ${val ? 'checked' : ''} onchange="${onChange}"> ${lbl}</label>`;
+      <input type="checkbox" id="${id}" ${val?'checked':''} onchange="${cb}"> ${lbl}</label>`;
   } else if (type === 'image') {
     const pid = id + '_p';
     wrap.innerHTML = `<label>${lbl}</label>
       ${val ? `<img id="${pid}" class="img-preview" src="${x(val)}" onerror="this.style.display='none'">` : ''}
       <input type="url" id="${id}" value="${x(val||'')}" placeholder="https://…"
-        oninput="${onChange};updImg('${pid}',this.value)">`;
+        oninput="${cb};updImg('${pid}',this.value)">`;
   } else if (type === 'text') {
     wrap.innerHTML = `<label for="${id}">${lbl}</label>
-      <textarea id="${id}" rows="3" oninput="${onChange}">${x(val||'')}</textarea>`;
+      <textarea id="${id}" rows="3" oninput="${cb}">${x(val||'')}</textarea>`;
   } else {
     wrap.innerHTML = `<label for="${id}">${lbl}</label>
-      <input type="${type === 'url' ? 'url' : 'text'}" id="${id}" value="${x(val||'')}"
-        oninput="${onChange}">`;
+      <input type="${type==='url'?'url':'text'}" id="${id}" value="${x(val||'')}" oninput="${cb}">`;
   }
   return wrap;
 }
@@ -348,7 +395,7 @@ function rebuildList(wrap, sk, lk, arr, schema) {
   arr.forEach((item, i) => {
     const card = el('div', 'list-item');
     card.innerHTML = `<div class="list-item__head">
-      <span class="list-item__num">#${i + 1}</span>
+      <span class="list-item__num">#${i+1}</span>
       <button class="btn btn--danger" onclick="removeItem('${sk}','${lk}',${i})">Удалить</button>
     </div>`;
     for (const [fk, fd] of Object.entries(schema)) {
@@ -361,9 +408,9 @@ function rebuildList(wrap, sk, lk, arr, schema) {
   addBtn.textContent = '+ Добавить';
   addBtn.onclick = () => {
     const blank = {};
-    for (const [k, v] of Object.entries(schema)) {
-      if (k === '_label' || !Array.isArray(v)) continue;
-      blank[k] = v[1] === 'boolean' ? false : '';
+    for (const [k,v] of Object.entries(schema)) {
+      if (k==='_label'||!Array.isArray(v)) continue;
+      blank[k] = v[1]==='boolean' ? false : '';
     }
     data[sk][lk].push(blank);
     rebuildList(wrap, sk, lk, data[sk][lk], schema);
@@ -371,13 +418,13 @@ function rebuildList(wrap, sk, lk, arr, schema) {
   wrap.appendChild(addBtn);
 }
 
-// ─── Data mutations ──────────────────────────────────
-function setVal(sk, fk, val)            { data[sk][fk] = val; }
-function setItem(sk, lk, i, fk, val)   { data[sk][lk][i][fk] = val; }
+// ─── Mutations ────────────────────────────────────────
+function setVal(sk, fk, v)          { data[sk][fk] = v; }
+function setItem(sk, lk, i, fk, v) { data[sk][lk][i][fk] = v; }
 function removeItem(sk, lk, i) {
   data[sk][lk].splice(i, 1);
   const wrap = document.querySelector(`[data-list="${sk}.${lk}"]`);
-  if (wrap) rebuildList(wrap, sk, lk, data[sk][lk], SCHEMA[sk][lk]);
+  if (wrap) rebuildList(wrap, sk, lk, data[sk][lk], landing().schema[sk][lk]);
 }
 function updImg(pid, src) {
   let img = document.getElementById(pid);
@@ -390,15 +437,16 @@ function updImg(pid, src) {
   if (img) { img.src = src; img.style.display = src ? 'block' : 'none'; }
 }
 
-// ─── Save ────────────────────────────────────────────
+// ─── Save ─────────────────────────────────────────────
 async function saveContent() {
   const btn = document.getElementById('saveBtn');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Сохраняем…';
+  btn.innerHTML = '<span class="spinner"></span>';
   setStatus('saving', 'Сохраняем…');
   try {
+    const { repo, file } = landing();
     const json = JSON.stringify(data, null, 2);
-    const res = await ghPut(FILE, json, fileSha, 'Admin: update content');
+    const res = await ghPut(repo, file, json, fileSha, `Admin: update ${currentKey} content`);
     fileSha = res.content.sha;
     setStatus('saved', 'Сохранено ✓');
     toast('Сохранено! Сайт обновится через ~30 сек', 'ok');
@@ -411,27 +459,31 @@ async function saveContent() {
   btn.textContent = 'Сохранить';
 }
 
-// ─── Helpers ─────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────
 function el(tag, cls) { const e = document.createElement(tag); if (cls) e.className = cls; return e; }
 function x(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-function setStatus(cls, txt = '') {
+function setStatus(cls, txt='') {
   const e = document.getElementById('saveStatus');
-  e.className = 'save-status' + (cls ? ' ' + cls : '');
+  e.className = 'save-status' + (cls ? ' '+cls : '');
   e.textContent = txt;
 }
-function toast(msg, type = '') {
+function toast(msg, type='') {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast' + (type ? ' ' + type : '');
+  t.textContent = msg; t.className = 'toast'+(type?' '+type:'');
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 4000);
 }
 
-// ─── Init ────────────────────────────────────────────
+// ─── Init ─────────────────────────────────────────────
 (function() {
   const saved = localStorage.getItem('l4u_pat');
-  if (saved) { pat = saved; loadAndRender(); }
-  document.getElementById('patInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+  if (saved) {
+    pat = saved;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    loadLanding();
+  }
+  document.getElementById('patInput').addEventListener('keydown', e => { if (e.key==='Enter') login(); });
 })();
 </script>
 </body>
